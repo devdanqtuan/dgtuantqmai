@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Love story of Gia Tuan &amp; Quynh Mai</title>
+
+    <link type="text/css" rel="stylesheet" href="./css/default.css">
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/jscex.js"></script>
+	<script type="text/javascript" src="./js/jscex-parser.js"></script>
+	<script type="text/javascript" src="./js/jscex-jit.js"></script>
+	<script type="text/javascript" src="./js/jscex-builderbase.js"></script>
+	<script type="text/javascript" src="./js/jscex-async.js"></script>
+	<script type="text/javascript" src="./js/jscex-async-powerpack.js"></script>
+	<script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
+	<script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
+</head>
+    <body>
+        <!--chỗ này để phát nhạc -->
+		<audio autoplay="autopaly">
+			<source src="./iloveu.mp3" audio="" mp3"="">
+		</audio>
+
+        <div id="main">
+            <!-- Gui loi nhan toi Tran Quynh Mai -->
+            <div id="error">！(づ￣ 3￣)づ！</div>
+            <div id="wrap">
+                <div id="text">
+			        <div id="code">
+			        	<span class="say"> Xin chào em! Người yêu của anh! Trần Quỳnh Mai.</span><br>
+						<span class="say"> </span><br>
+			        	<span class="say">Một trong những món quà đặc biệt anh muốn dành tặng cho riêng mình em. </span><br>
+                        <span class="say"> </span><br>
+                        <span class="say">Em biết không, trong khoảng thời gian từ khi anh quen em tới bây giờ, bản thân đã cảm thấy anh rất hạnh phúc và may mắn khi gặp được em, em không nói nhưng anh luôn cảm nhận được rằng em luôn dành cho anh sự tử tế và ưu tiên trong tình yêu này. </span><br>
+                        <span class="say"> </span><br>
+                        <span class="say"> Chúng ta cũng đều đã trưởng thành, không còn những suy nghĩ non nớt khi còn nhỏ. Hi vọng chúng ta sẽ đủ bản lĩnh để cùng nhau trải qua những sóng gió trong tương lai của mối quan hệ này. Vậy nên anh và em sẽ cùng trải nghiệm những điều mới cùng nhau nhé.</span><br>
+                        <span class="say"> </span><br>
+			        	<span class="say"> Bản thân anh cũng phải biết rằng anh cần phải nỗ lực hơn từng ngày để xứng đáng với tình cảm mà em dành cho anh. Anh sẽ không bao giờ để cho em phải cảm thấy tủi thân hay thua thiệt so với những người khác. </span><br>
+                        <span class="say"> </span><br>
+			        	<span class="say"> Cảm ơn vì đã đến bên cuộc đời của anh. Cảm ơn vì đã yêu thương anh vô điều kiện. Cảm ơn em 🥰🇻🇳🇷🇺</span><br>
+                        <span class="say"><span class="space"></span>Anh yêu của em: Đặng Gia Tuấn</span>
+			        </div>
+                </div>
+                <div id="clock-box">
+                    <span class="STYLE1">Thời gian mà chúng ta đã dành cho nhau</span>
+                  <div id="clock"></div>
+              </div>
+                <canvas id="canvas" width="1100" height="680"></canvas>
+            </div>
+            
+        </div>
+    
+    <script>
+    </script>
+
+    <script>
+    (function(){
+        var canvas = $('#canvas');
+		
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        var width = canvas.width();
+        var height = canvas.height();
+        
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]] 
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
+        }
+
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        canvas.click(function(e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0; 
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }).mousemove(function(e){
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+    	        tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+    	        tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            // Cho nay de anh background
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
+
+        var jumpAnimate = eval(Jscex.compile("async", function () {
+            var ctx = tree.ctx;
+            while (true) {
+                tree.ctx.clearRect(0, 0, width, height);
+                tree.jump();
+                foot.draw();
+                $await(Jscex.Async.sleep(25));
+            }
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+		    var together = new Date();
+		    together.setFullYear(2024, 0,13); 			//nam thang ngay
+		    together.setHours(12);
+		    together.setMinutes(0);
+		    together.setSeconds(0);	
+		    together.setMilliseconds(0);
+
+		    $("#code").show().typewriter();
+            $("#clock-box").fadeIn(1000);
+            while (true) {
+                timeElapse(together);
+                $await(Jscex.Async.sleep(1000));
+            }
+        }));
+
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+
+            textAnimate().start();
+
+            $await(jumpAnimate());
+        }));
+
+        runAsync().start();
+    })();
+    </script>
+</body>
+</html>
