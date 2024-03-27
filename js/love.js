@@ -529,6 +529,9 @@
 
     window.random = random;
     window.bezier = bezier;
+
+
+// 61,6e,68,20,63,c5,a9,6e,67,20,63,68,e1,bb,89,20,6d,75,e1,bb,91,6e,20,65,6d,20,6e,c3,b3,69,20,79,c3,aa,75,20,61,6e,68,20,74,68,c3,b4,69,20,2e,2e
     window.Point = Point;
     window.Tree = Tree;
 
